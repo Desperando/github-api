@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  repository-api:
+    environment:
+      - ENV_CLIENT_ID=
+      - ENV_CLIENT_SECRET=
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: com-repository-api:latest
+    container_name: repository-api
+    networks:
+      - application
+    ports:
+      - "8080:8080"
+networks:
+  application:
+    driver: bridge

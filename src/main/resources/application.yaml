@@ -1,0 +1,5 @@
+config:
+  github:
+    url-prefix: https://api.github.com
+    client-id: ${ENV_CLIENT_ID}
+    client-secret: ${ENV_CLIENT_SECRET}
