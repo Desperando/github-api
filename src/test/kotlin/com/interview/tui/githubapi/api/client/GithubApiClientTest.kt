@@ -11,10 +11,6 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.beans.factory.config.YamlMapFactoryBean
-import org.springframework.beans.factory.config.YamlPropertiesFactoryBean
-import org.springframework.boot.env.YamlPropertySourceLoader
-import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
@@ -48,7 +44,7 @@ class GithubApiClientTest {
     }
 
     @Test
-    fun getRepositoriesForUser_whenAllDataForRequestIsProvided_thenReturnFluxOfRepositories() {
+    fun getRepositoriesForUser_givenAllDataForApiRequest_thenReturnFluxOfRepositories() {
         GithubApiClientHelper.okStub()
 
         val apiRepositories = githubApiClient.getRepositoriesForUser(
@@ -64,7 +60,7 @@ class GithubApiClientTest {
     }
 
     @Test
-    fun getRepositoriesForUser_whenNotExistedUsernameRequested_thenThrowUserNotFoundException() {
+    fun getRepositoriesForUser_givenDesistedUsername_thenThrowUserNotFoundException() {
         GithubApiClientHelper.notFound()
 
         assertThrows<UserNotFoundException> {
@@ -77,7 +73,7 @@ class GithubApiClientTest {
     }
 
     @Test
-    fun getRepositoriesForUser_whenRequestIsForbidden_thenThrowApiClientException() {
+    fun getRepositoriesForUser_givenApiResponseWithUnexpectedStatus_thenThrowApiClientException() {
         GithubApiClientHelper.forbidden()
 
         assertThrows<ApiClientException> {
@@ -89,7 +85,7 @@ class GithubApiClientTest {
     }
 
     @Test
-    fun getBranchesForUserAndRepo_whenAllDataForRequestIsProvided_thenReturnFluxOfRepositories() {
+    fun getBranchesForUserAndRepo_givenAllDataForApiRequest_thenReturnFluxOfBranches() {
         GithubApiClientHelper.okStub()
 
         val apiBranches = githubApiClient.getBranchesForUserAndRepo(
@@ -106,7 +102,7 @@ class GithubApiClientTest {
     }
 
     @Test
-    fun getBranchesForUserAndRepo_whenNotExistedUsernameOrRepoRequested_thenReturnEmptyFlux() {
+    fun getBranchesForUserAndRepo_givenNotFoundApiResponse_thenReturnEmptyFlux() {
         GithubApiClientHelper.notFound()
 
 
@@ -126,7 +122,7 @@ class GithubApiClientTest {
     }
 
     @Test
-    fun getBranchesForUserAndRepo_whenRequestIsForbidden_thenThrowApiClientException() {
+    fun getBranchesForUserAndRepo_givenApiResponseWithUnexpectedStatus_thenThrowApiClientException() {
         GithubApiClientHelper.forbidden()
 
         assertThrows<ApiClientException> {
