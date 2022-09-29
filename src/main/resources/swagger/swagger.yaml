@@ -1,0 +1,102 @@
+openapi: 3.0.0
+info:
+  title: 'GitHub Repository API for learning'
+  description: Api to reactive parse public repositories and branches
+  version: '1.0'
+paths:
+  /repositories/{username}:
+    get:
+      tags:
+        - Repositories
+      summary: List of repositories
+      description: Provides info about public repositories for a specific user with basic branch information.
+      operationId: repositoriesForUser
+      parameters:
+        - in: path
+          name: username
+          description: login of user on the GitHub platform
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: forked
+          description: Flag to determine which repositories should be collected.
+          required: false
+          schema:
+            type: string
+            enum: ["ALL", "FORKED", "NOT_FORKED"]
+            default: NOT_FORKED
+      responses:
+        '200':
+          description: OK response, content is returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/repositoryResponse'
+        '400':
+          description: Any unrecognized error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '404':
+          description: User with specified username hasn't been found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+        '406':
+          description: Requested is not accepted. Response couldn't be provided by specified Accept header.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errorResponse'
+components:
+  schemas:
+    repositoryResponse:
+      title: Repository Response
+      description: Common information about repository
+      type: object
+      required:
+        - login
+        - repositoryName
+        - branches
+      properties:
+        login:
+          type: string
+          description: Login of repository owner
+        repositoryName:
+          type: string
+          description: Name of repository
+        branches:
+          type: array
+          items:
+            $ref: '#/components/schemas/branchResponse'
+    branchResponse:
+      title: Branch response
+      description: Common information about branch
+      type: object
+      required:
+        - sha
+        - branchName
+      properties:
+        sha:
+          type: string
+          description: SHA code of the last commin in the current branch
+        branchName:
+          type: string
+          description: Name of a branch.
+    errorResponse:
+      title: Application error response
+      description: Common error response on 4xx and 5xx errors
+      type: object
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: integer
+          description: Status code of error. Usually matches with response code.
+        message:
+          type: string
+          description: Short info why error was happened.

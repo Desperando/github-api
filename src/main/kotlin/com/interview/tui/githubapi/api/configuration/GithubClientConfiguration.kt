@@ -1,6 +1,6 @@
-package com.interview.tui.githubapi.config
+package com.interview.tui.githubapi.api.configuration
 
-import com.interview.tui.githubapi.config.properties.GithubClientConfigurationProperties
+import com.interview.tui.githubapi.api.configuration.properties.GithubClientConfigurationProperties
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

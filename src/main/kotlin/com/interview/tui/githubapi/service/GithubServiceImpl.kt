@@ -1,12 +1,16 @@
 package com.interview.tui.githubapi.service
 
-import com.interview.tui.githubapi.service.dto.api.github.GithubApiBranchDto
-import com.interview.tui.githubapi.service.dto.api.github.GithubApiRepositoryDto
+import com.interview.tui.githubapi.api.client.GithubApiClient
+import com.interview.tui.githubapi.api.dto.GithubApiBranchDto
+import com.interview.tui.githubapi.api.dto.GithubApiRepositoryDto
+import com.interview.tui.githubapi.service.dto.request.ForkFilter
 import com.interview.tui.githubapi.service.dto.response.RepositoryDto
 import com.interview.tui.githubapi.service.mapper.GithubApiDtoMapper
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Signal
+import reactor.kotlin.core.publisher.toFlux
+import java.util.stream.Collectors
 
 @Service
 class GithubServiceImpl(
@@ -14,20 +18,22 @@ class GithubServiceImpl(
     private val apiResponseMapper: GithubApiDtoMapper
 ) : GitService {
 
-    val startPage = 1
+    private companion object {
+        val START_PAGE = 1
+    }
 
-    override fun findRepositoriesForUser(username: String): Flux<RepositoryDto> {
-        return fetchPagesForRepository(username, startPage)
-            .filter { !it.fork }
-            .map {
-                apiResponseMapper.mapRepositoryApiToResponse(it)
-            }.flatMap { repository ->
-                fetchPagesForBranch(username, repository, startPage)
+    override fun findRepositoriesForUser(username: String, forkFilter: ForkFilter): Flux<RepositoryDto> {
+        return fetchPagesForRepository(username, START_PAGE)
+            .filter { ForkFilter.ALL == forkFilter || it.fork == forkFilter.forked }
+            .map { apiResponseMapper.mapRepositoryApiToResponse(it) }
+            .flatMap { repository ->
+                fetchPagesForBranch(username, repository, START_PAGE)
                     .map { apiResponseMapper.mapBranchApiToResponse(it) }
+                    .collect(Collectors.toList())
                     .map {
-                        repository.branches.add(it)
+                        repository.branches.addAll(it)
                         repository
-                    }
+                    }.toFlux()
             }
     }
 

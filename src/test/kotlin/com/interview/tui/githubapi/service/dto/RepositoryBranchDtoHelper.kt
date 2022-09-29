@@ -1,6 +1,7 @@
-package com.interview.tui.githubapi.service.dto.response
+package com.interview.tui.githubapi.service.dto
 
-import java.util.UUID
+import com.interview.tui.githubapi.service.dto.response.RepositoryBranchDto
+import java.util.*
 import kotlin.random.Random
 
 object RepositoryBranchDtoHelper {

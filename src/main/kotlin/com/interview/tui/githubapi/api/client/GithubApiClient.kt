@@ -1,10 +1,9 @@
-package com.interview.tui.githubapi.service
+package com.interview.tui.githubapi.api.client
 
-import com.interview.tui.githubapi.error.exception.BranchesNotFoundException
-import com.interview.tui.githubapi.error.exception.GithubApiClientException
-import com.interview.tui.githubapi.error.exception.UserNotFoundException
-import com.interview.tui.githubapi.service.dto.api.github.GithubApiBranchDto
-import com.interview.tui.githubapi.service.dto.api.github.GithubApiRepositoryDto
+import com.interview.tui.githubapi.api.dto.GithubApiBranchDto
+import com.interview.tui.githubapi.api.dto.GithubApiRepositoryDto
+import com.interview.tui.githubapi.api.error.exception.ApiClientException
+import com.interview.tui.githubapi.api.error.exception.UserNotFoundException
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
@@ -15,7 +14,7 @@ import reactor.core.publisher.Flux
 class GithubApiClient(
     private val githubWebClient: WebClient,
 ) {
-    private companion object GithubApiClientConsts {
+    internal companion object {
         //Accept Header value
         val GITHUB_API_ACCEPT_HEADER = "application/vnd.github+json"
 
@@ -43,7 +42,7 @@ class GithubApiClient(
                 when (it.statusCode()) {
                     HttpStatus.OK -> it.bodyToFlux(GithubApiRepositoryDto::class.java)
                     HttpStatus.NOT_FOUND -> throw UserNotFoundException(username = username)
-                    else -> throw GithubApiClientException("API returned with error code ${it.statusCode()}")
+                    else -> throw ApiClientException("API returned with error code ${it.statusCode()}")
                 }
             }
     }
@@ -61,8 +60,8 @@ class GithubApiClient(
             .exchangeToFlux {
                 when (it.statusCode()) {
                     HttpStatus.OK -> it.bodyToFlux(GithubApiBranchDto::class.java)
-                    HttpStatus.NOT_FOUND -> throw BranchesNotFoundException(username, repoName)
-                    else -> throw GithubApiClientException("API returned with error code ${it.statusCode()}")
+                    HttpStatus.NOT_FOUND -> Flux.empty()
+                    else -> throw ApiClientException("API returned with error code ${it.statusCode()}")
                 }
             }
     }

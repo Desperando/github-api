@@ -1,4 +1,4 @@
-package com.interview.tui.githubapi.error.exception
+package com.interview.tui.githubapi.api.error.exception
 
 class UserNotFoundException(
     private val username: String,

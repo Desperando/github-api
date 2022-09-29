@@ -1,8 +1,7 @@
 package com.interview.tui.githubapi.service.mapper
 
-import com.interview.tui.githubapi.service.dto.api.github.GithubApiBranchDto
-import com.interview.tui.githubapi.service.dto.api.github.GithubApiRepositoryBranchDtoHelper
-import com.interview.tui.githubapi.service.dto.api.github.GithubApiRepositoryDtoHelper
+import com.interview.tui.githubapi.api.dto.GithubApiRepositoryBranchDtoHelper
+import com.interview.tui.githubapi.api.dto.GithubApiRepositoryDtoHelper
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired

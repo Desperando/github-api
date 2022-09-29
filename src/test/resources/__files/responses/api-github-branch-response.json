@@ -1,0 +1,26 @@
+[
+  {
+    "name": "branch1",
+    "commit": {
+      "sha": "b71572d3625b29d0a7c84ea574dfae59bf0ca3e6ace4ccd951b7a9a2ebb23925",
+      "url": "https://api.github.com/repos/Username/RepoName/commits/b71572d3625b29d0a7c84ea574dfae59bf0ca3e6ace4ccd951b7a9a2ebb23925"
+    },
+    "protected": false
+  },
+  {
+    "name": "branch2",
+    "commit": {
+      "sha": "e2bdc33dc0d5717dc9d714a1c25249ae5df08945bb9ea6ca2bef39101f6d1f43",
+      "url": "https://api.github.com/repos/Username/RepoName/commits/e2bdc33dc0d5717dc9d714a1c25249ae5df08945bb9ea6ca2bef39101f6d1f43"
+    },
+    "protected": false
+  },
+  {
+    "name": "branch3",
+    "commit": {
+      "sha": "7da649c6e0cb243648607c6d40bd7dd9bf94f2e8978aad53816d16b5da47d440",
+      "url": "https://api.github.com/repos/Username/RepoName/commits/7da649c6e0cb243648607c6d40bd7dd9bf94f2e8978aad53816d16b5da47d440"
+    },
+    "protected": false
+  }
+]

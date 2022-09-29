@@ -1,4 +1,6 @@
-package com.interview.tui.githubapi.service.dto.response
+package com.interview.tui.githubapi.service.dto
+
+import com.interview.tui.githubapi.service.dto.response.RepositoryDto
 
 object RepositoryDtoHelper {
     fun generateRepositoryResponseDto() : RepositoryDto {

@@ -1,0 +1,7 @@
+config:
+  github:
+    url-prefix: http://localhost:9001
+    client-id: SOME_CLIENT_ID
+    client-secret: SOME_CLIENT_SECRET
+wiremock:
+  port: 9001

@@ -1,7 +1,7 @@
 package com.interview.tui.githubapi.service.mapper
 
-import com.interview.tui.githubapi.service.dto.api.github.GithubApiBranchDto
-import com.interview.tui.githubapi.service.dto.api.github.GithubApiRepositoryDto
+import com.interview.tui.githubapi.api.dto.GithubApiBranchDto
+import com.interview.tui.githubapi.api.dto.GithubApiRepositoryDto
 import com.interview.tui.githubapi.service.dto.response.RepositoryBranchDto
 import com.interview.tui.githubapi.service.dto.response.RepositoryDto
 import org.mapstruct.Mapper

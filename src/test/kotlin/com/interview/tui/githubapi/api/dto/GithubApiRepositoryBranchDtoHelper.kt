@@ -1,7 +1,7 @@
-package com.interview.tui.githubapi.service.dto.api.github
+package com.interview.tui.githubapi.api.dto
 
 import com.interview.tui.githubapi.service.dto.response.RepositoryBranchDto
-import java.util.UUID
+import java.util.*
 import kotlin.random.Random
 import kotlin.test.assertEquals
 

@@ -17,10 +17,17 @@ To stop web application, perform please next command:
 `docler-compose down`
 
 To delete and rebuild image perform next commands:
-* `docker image rm com-repository-api:latest`
-* `docker-compose up -d`
+1. `docker container rm $(docker container ls -a --filter="ancestor=com-repository-api:latest" -q)`
+2. `docker image rm com-repository-api:latest`
+3. `docker-compose up -d`
 
 The following api mappings are available:
 `/repositories/{username}` - list of repositories for a particular user with specified `username` in URL path. \
 **Required**\
 Path Variable: _username_ - name of user for which repositories must be retrieved \
+
+###Swagger
+
+Swagger is available via URIs: 
+* /swagger
+* /swagger-ui/index.html

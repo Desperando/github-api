@@ -13,7 +13,7 @@ class GlobalErrorAttributes(
     private val mapper: ObjectMapper
 ) : DefaultErrorAttributes() {
 
-    companion object GlobalErrorAttributesConst {
+    companion object {
         const val STATUS_KEY = "status"
         const val MESSAGE_KEY = "message"
     }

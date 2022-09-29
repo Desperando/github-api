@@ -19,6 +19,7 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("io.springfox:springfox-boot-starter:3.0.0")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
@@ -34,6 +35,7 @@ dependencies {
     testImplementation("org.springframework.security:spring-security-test")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
+    testImplementation("com.github.tomakehurst:wiremock-jre8:2.34.0")
 
     kapt("org.mapstruct:mapstruct-processor:1.5.2.Final")
 }

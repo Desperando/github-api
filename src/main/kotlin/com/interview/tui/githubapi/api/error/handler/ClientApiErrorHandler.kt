@@ -1,15 +1,15 @@
-package com.interview.tui.githubapi.error.controller
+package com.interview.tui.githubapi.api.error.handler
 
+import com.interview.tui.githubapi.api.error.exception.ApiClientException
+import com.interview.tui.githubapi.api.error.exception.UserNotFoundException
 import com.interview.tui.githubapi.error.dto.ApplicationErrorResponse
-import com.interview.tui.githubapi.error.exception.GithubApiClientException
-import com.interview.tui.githubapi.error.exception.UserNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
 @RestControllerAdvice
-class GitServiceErrorController {
+class ClientApiErrorHandler {
     @ExceptionHandler(UserNotFoundException::class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     fun handleNotFound(exception: UserNotFoundException): ApplicationErrorResponse {
@@ -19,9 +19,9 @@ class GitServiceErrorController {
         )
     }
 
-    @ExceptionHandler(GithubApiClientException::class)
+    @ExceptionHandler(ApiClientException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    fun handleNotFound(exception: GithubApiClientException): ApplicationErrorResponse {
+    fun handleNotFound(exception: ApiClientException): ApplicationErrorResponse {
         return ApplicationErrorResponse(
             status = HttpStatus.BAD_REQUEST.value(),
             message = exception.message.orEmpty()

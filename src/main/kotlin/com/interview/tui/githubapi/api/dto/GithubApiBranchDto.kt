@@ -1,4 +1,4 @@
-package com.interview.tui.githubapi.service.dto.api.github
+package com.interview.tui.githubapi.api.dto
 
 data class GithubApiBranchDto(
     val name: String,
