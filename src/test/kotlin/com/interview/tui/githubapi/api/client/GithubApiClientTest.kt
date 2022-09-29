@@ -28,13 +28,9 @@ import reactor.test.StepVerifier
 @TestPropertySource("classpath:application-test.properties")
 @ContextConfiguration(
     classes = [
-        YamlMapFactoryBean::class,
-        YamlPropertiesFactoryBean::class,
-        YamlPropertySourceLoader::class,
         GithubApiClientTest.TestWireMockConfiguration::class
     ]
 )
-@AutoConfigureWebTestClient
 class GithubApiClientTest {
 
     @Autowired
